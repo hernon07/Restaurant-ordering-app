@@ -70,6 +70,21 @@ function orderRender(order) {
     remove.parentElement.remove();
   });
 }
+const pay = document.getElementById("order");
+const card = document.getElementById("card");
+/*pay form */
+
+const submit = document.getElementById("submit");
+
+submit.addEventListener("click", function () {
+  card.classList.add("hide");
+});
+
+/* show card form */
+
+pay.addEventListener("click", function () {
+  card.classList.remove("hide");
+});
 
 /* onload */
 function loadMenu() {
