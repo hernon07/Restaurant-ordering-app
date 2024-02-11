@@ -28,7 +28,48 @@ const main = document.querySelector("main[class='menu']");
 const name = document.querySelector("#name");
 const price = document.querySelector("#price");
 
-main.addEventListener("click", function (e) {});
+main.addEventListener("click", function (e) {
+  if (e.target.tagName === "INPUT") {
+    const order = menuArray.find((menu) => menu.id == e.target.id);
+    orderRender(order);
+  }
+});
+
+/* render order */
+
+function orderRender(order) {
+  const name = document.createElement("p");
+  name.textContent = order.name;
+  name.classList.add("bold");
+
+  const remove = document.createElement("p");
+  remove.textContent = "remove";
+  remove.setAttribute("id", remove);
+
+  const price = document.createElement("p");
+  price.textContent = order.price;
+  price.classList.add("price");
+
+  const div = document.createElement("div");
+  div.classList.add("wrapper");
+
+  div.appendChild(name);
+  div.appendChild(remove);
+  div.appendChild(price);
+
+  document.getElementById("ctn").appendChild(div);
+
+  const totalPrice = document.getElementById("total-price");
+  totalPrice.textContent = Number(totalPrice.textContent) + order.price;
+
+  /*remove btn */
+
+  remove.addEventListener("click", function () {
+    const totalPrice = document.getElementById("total-price");
+    totalPrice.textContent = Number(totalPrice.textContent) - order.price;
+    remove.parentElement.remove();
+  });
+}
 
 /* onload */
 function loadMenu() {
